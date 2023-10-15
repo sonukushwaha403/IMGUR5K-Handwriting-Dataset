@@ -1,3 +1,4 @@
+download_imgur5k.py
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Copyright (c) Facebook, Inc. and its affiliates.
 All rights reserved.
@@ -114,7 +115,7 @@ def main():
     # Format: { "index_id" : {indexes}, "index_to_annotation_map" : { annotations ids for an index}, "annotation_id": { each annotation's info } }
     # Bounding boxes with '.' mean the annotations were not done for various reasons
 
-    _F = np.loadtxt(f'{args.dataset_info_dir}/imgur5k_data.lst', delimiter="\t", dtype=np.str, encoding="utf-8")
+    _F = np.loadtxt(f'{args.dataset_info_dir}/imgur5k_data.lst', delimiter='\t', dtype=str, encoding="utf-8")
     anno_json = {}
 
     anno_json['index_id'] = {}
@@ -142,7 +143,7 @@ def main():
     # Now split the annotations json in train, validation and test jsons
     splits = ['train', 'val', 'test']
     for split in splits:
-        _split_idx = np.loadtxt(f'{args.dataset_info_dir}/{split}_index_ids.lst', delimiter="\n", dtype=np.str)
+        _split_idx = np.loadtxt(f'{args.dataset_info_dir}/{split}_index_ids.lst', delimiter=None, dtype=str)
         split_json = _create_split_json(anno_json, _split_idx)
         json.dump(split_json, open(f'{args.dataset_info_dir}/imgur5k_annotations_{split}.json', 'w'), indent=4)
 
